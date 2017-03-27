@@ -89,14 +89,10 @@ void controlPins(bool flag, char pin) {
       digitalWrite(4, HIGH);
     }
     else if (pin == '5') {
-      digitalWrite(0, LOW);
-      digitalWrite(2, LOW);
-      digitalWrite(15, LOW);
-      digitalWrite(4, LOW);
       digitalWrite(5, HIGH);
-      digitalWrite(13, LOW);
     }
     else if (pin == '6') {
+      digitalWrite(5, LOW);
       digitalWrite(13, HIGH);
     }
   } else {
