@@ -14,16 +14,12 @@ void setup_wifi() {
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
-
   WiFi.begin(ssid, password);
-
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-
   randomSeed(micros());
-
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
@@ -65,6 +61,7 @@ void setup() {
   pinMode(15, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+  pinMode(13, OUTPUT);
   Serial.begin(115200);
   setup_wifi();
   client.setServer(mqtt_server, 1883);
@@ -79,16 +76,35 @@ void loop() {
 
 void controlPins(bool flag, char pin) {
   if (!flag) {
-    if (pin == '1') digitalWrite(0, HIGH);
-    else if (pin == '2') digitalWrite(2, HIGH);
-    else if (pin == '3') digitalWrite(15, HIGH);
-    else if (pin == '4') digitalWrite(4, HIGH);
-    else if (pin == '5') digitalWrite(5, HIGH);
+    if (pin == '1') {
+      digitalWrite(0, HIGH);
+    }
+    else if (pin == '2') {
+      digitalWrite(2, HIGH);
+    }
+    else if (pin == '3') {
+      digitalWrite(15, HIGH);
+    }
+    else if (pin == '4') {
+      digitalWrite(4, HIGH);
+    }
+    else if (pin == '5') {
+      digitalWrite(0, LOW);
+      digitalWrite(2, LOW);
+      digitalWrite(15, LOW);
+      digitalWrite(4, LOW);
+      digitalWrite(5, HIGH);
+      digitalWrite(13, LOW);
+    }
+    else if (pin == '6') {
+      digitalWrite(13, HIGH);
+    }
   } else {
     digitalWrite(0, LOW);
     digitalWrite(2, LOW);
     digitalWrite(15, LOW);
     digitalWrite(4, LOW);
     digitalWrite(5, LOW);
+    digitalWrite(13, LOW);
   }
 }
